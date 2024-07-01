@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import LoginPage from './pages/LoginPage';
+import EmployeePage from './pages/EmployeePage';
+import EmployerPage from './pages/EmployerPage';
+import EmployeeListPage from './pages/EmployeeListPage';
+import LoginLogsPage from './pages/LoginLogsPage';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () => {
+    const [role, setRole] = useState('');
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+    return (
+        <Router>
+            <Navbar role={role} isLoggedIn={isLoggedIn} />
+            <Routes>
+                <Route path="/" element={<LoginPage setRole={setRole} setIsLoggedIn={setIsLoggedIn} />} />
+                <Route path="/employee" element={<EmployeePage />} />
+                <Route path="/employer" element={<EmployerPage />} />
+                <Route path="/employees" element={<EmployeeListPage />} />
+                <Route path="/login-logs" element={<LoginLogsPage />} />
+            </Routes>
+        </Router>
+    );
+};
 
 export default App;
