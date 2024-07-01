@@ -1,0 +1,25 @@
+﻿-- Create Users Table
+CREATE TABLE Users (
+    UserId INT PRIMARY KEY IDENTITY(1,1),
+    Username NVARCHAR(50) NOT NULL,
+    Password NVARCHAR(50) NOT NULL,
+    Role NVARCHAR(20) NOT NULL -- 'Employee', 'Employer', or 'Admin'
+);
+
+-- Create Employees Table
+CREATE TABLE Employees (
+    EmployeeId INT PRIMARY KEY IDENTITY(1,1),
+    EmployeeName NVARCHAR(100) NOT NULL,
+    EmployeeDescription NVARCHAR(255) NOT NULL,
+    EmployeeAge INT NOT NULL,
+    EmployeeGender NVARCHAR(10) NOT NULL
+);
+
+-- Create LoginLogs Table
+CREATE TABLE LoginLogs (
+    LogId INT PRIMARY KEY IDENTITY(1,1),
+    EmployeeId INT,
+    LoginDate DATETIME NOT NULL,
+    LogoutDate DATETIME,
+    FOREIGN KEY (EmployeeId) REFERENCES Employees(EmployeeId)
+);
